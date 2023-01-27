@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './index.css';
 import Pokemon from './pokemon/Pokemon.jsx';
-import { Card } from 'flowbite-react';
+
+import NavBar from './assets/Navbar';
 
 const urlApi = 'https://pokeapi.co/api/v2/pokemon?limit=20';
 
@@ -50,8 +51,10 @@ function Pokedex() {
    return (
       <div className="App">
          <main>
+            <NavBar name="Pokedex" />
+
             <div className="container mx-auto">
-               <h1 className="text-3xl font-bold py-4">Pokedex</h1>
+               <br />
 
                <div className="flex flex-wrap -mx-3 ">
                   {pokemons.map((pokemon, index) => (
