@@ -2,7 +2,7 @@ export default function Type(props) {
    const classBasic =
       'inline-block mx-1 px-2 py-1 leading-none rounded-full font-semibold uppercase tracking-wide text-xs ';
 
-   switch (props.name) {
+   switch (props.nameType) {
       case 'fighting':
          var color = 'bg-indigo-200 text-indigo-800';
          break;
@@ -76,5 +76,9 @@ export default function Type(props) {
          break;
    }
 
-   return <span className={classBasic + color}>{props.name}</span>;
+   return (
+      <span className={classBasic + color} key={Math.random()}>
+         {props.nameType}
+      </span>
+   );
 }

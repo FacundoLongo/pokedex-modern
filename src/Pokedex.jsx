@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './index.css';
-import Type from './pokemon/Type';
-import Progress from './pokemon/Progress';
+import Pokemon from './pokemon/Pokemon.jsx';
+import { Card } from 'flowbite-react';
 
-const urlApi = 'https://pokeapi.co/api/v2/pokemon?limit=50';
+const urlApi = 'https://pokeapi.co/api/v2/pokemon?limit=20';
 
 function Pokedex() {
    const [pokemons, setPokemons] = useState([]);
@@ -55,56 +55,14 @@ function Pokedex() {
 
                <div className="flex flex-wrap -mx-3 ">
                   {pokemons.map((pokemon, index) => (
-                     <div
-                        key={index /*pokemon.id */}
-                        className="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4"
-                     >
-                        <a
-                           href="#"
-                           className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden"
-                        >
-                           <div className="relative pb-48 overflow-hidden">
-                              <img
-                                 className="absolute inset-0 h-full max-w-full object-fill mx-auto px-6 py-5"
-                                 src={
-                                    pokemon.sprites.other.dream_world
-                                       .front_default
-                                 }
-                                 alt={pokemon.name}
-                              />
-                           </div>
-
-                           <div className="p-4">
-                              {pokemon.types.map((item, index) => (
-                                 <Type
-                                    key={`-${index}`}
-                                    name={item.type.name}
-                                 />
-                              ))}
-
-                              <h2 className="mt-2 mb-2  font-bold">
-                                 {pokemon.name
-                                    .charAt(0)
-                                    .toUpperCase()
-                                    .concat(pokemon.name.slice(1))}
-                              </h2>
-
-                              <p className="text-sm">
-                                 <b>Experience:</b> {pokemon.base_experience}{' '}
-                                 <br />
-                                 {pokemon.stats.map((st, index) => (
-                                    <>
-                                       <Progress
-                                          key={index}
-                                          name={st.stat.name}
-                                          stat={st.base_stat}
-                                       />
-                                    </>
-                                 ))}
-                              </p>
-                           </div>
-                        </a>
-                     </div>
+                     <Pokemon
+                        key={index}
+                        name={pokemon.name}
+                        image={pokemon.sprites.other.dream_world.front_default}
+                        experience={pokemon.base_experience}
+                        stats={pokemon.stats}
+                        types={pokemon.types}
+                     />
                   ))}
                </div>
 

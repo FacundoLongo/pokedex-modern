@@ -85,7 +85,7 @@ export default function Progress(props) {
    }
 
    return (
-      <div className="relative pt-1">
+      <div className="relative pt-1" key={Math.random()}>
          <b>{name}</b>
          <div className={classDiv}>
             <div style={{ width: percentage }} className={classProgress}>
