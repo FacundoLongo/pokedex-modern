@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './index.css';
-import Pokemon from './pokemon/Pokemon.jsx';
+import Card from './pokemon/Card.jsx';
 
 import NavBar from './assets/Navbar';
 
@@ -58,7 +58,7 @@ function Pokedex() {
 
                <div className="flex flex-wrap -mx-3 ">
                   {pokemons.map((pokemon, index) => (
-                     <Pokemon
+                     <Card
                         key={index}
                         name={pokemon.name}
                         image={pokemon.sprites.other.dream_world.front_default}
