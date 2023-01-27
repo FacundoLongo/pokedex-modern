@@ -14,6 +14,7 @@ function Pokedex() {
    const [query, setQuery] = useState('');
    const [searchInput, setSearchInput] = useState(false);
    const [alert, setAlert] = useState(false);
+   const [favouriteButton, setFavouriteButton] = useState(false);
 
    // fetch data from PokeApi
    useEffect(() => {
@@ -57,8 +58,10 @@ function Pokedex() {
          <main>
             <NavBar
                name="Pokedex"
-               state={searchInput}
-               setState={setSearchInput}
+               searchState={searchInput}
+               searchSetState={setSearchInput}
+               favButton={favouriteButton}
+               favBtnSetState={setFavouriteButton}
             />
 
             <div className="container mx-auto">
@@ -116,7 +119,7 @@ function Pokedex() {
                      })
                      .map((pokemon, index) => (
                         <Card
-                           key={index}
+                           key={pokemon.id}
                            name={pokemon.name}
                            image={
                               pokemon.sprites.other.dream_world.front_default

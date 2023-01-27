@@ -1,4 +1,16 @@
 export default function NavBar(props) {
+   if (props.favButton) {
+      var classFav = 'hover:text-red-600';
+   } else {
+      var classFav = 'hover:text-red-800 fill-red-500';
+   }
+
+   if (props.searchState === true) {
+      var classSearch = 'hover:text-blue-600 text-blue-600';
+   } else {
+      var classSearch = 'hover:text-blue-400';
+   }
+
    return (
       <header
          aria-label="Site Header"
@@ -7,7 +19,7 @@ export default function NavBar(props) {
          <div className="mx-auto flex h-16 max-w-screen-2xl items-center justify-between sm:px-6 lg:px-8 ">
             <div className="flex items-center">
                <a href="#" className="flex">
-                  <h2 className="px-4 font-bold text-lg">{props.name}</h2>
+                  <h2 className="px-4 font-bold text-xl">{props.name}</h2>
                </a>
             </div>
 
@@ -26,7 +38,10 @@ export default function NavBar(props) {
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="currentColor"
-                              className="w-6 h-6 hover:text-blue-600"
+                              className={`w-6 h-6 ${classFav}`}
+                              onClick={() =>
+                                 props.favBtnSetState(!props.favButton)
+                              }
                            >
                               <path
                                  strokeLinejoin="round"
@@ -39,55 +54,31 @@ export default function NavBar(props) {
                      </span>
 
                      <span>
-                        {props.state === true ? (
-                           <a
-                              href="#"
-                              className="block border-b-4 border-transparent p-4"
-                              style={{ marginTop: '5px' }}
+                        <a
+                           href="#"
+                           className="block border-b-4 border-transparent p-4"
+                           style={{ marginTop: '5px' }}
+                        >
+                           <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className={`w-6 h-6 ${classSearch}`}
+                              onClick={() =>
+                                 props.searchSetState(!props.searchState)
+                              }
                            >
-                              <svg
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 fill="none"
-                                 viewBox="0 0 24 24"
-                                 strokeWidth="1.5"
-                                 stroke="currentColor"
-                                 className="w-6 h-6 hover:text-blue-600 text-blue-800"
-                                 onClick={() => props.setState(!props.state)}
-                              >
-                                 <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                                 />
-                              </svg>
+                              <path
+                                 strokeLinecap="round"
+                                 strokeLinejoin="round"
+                                 d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                              />
+                           </svg>
 
-                              <span className="sr-only">Buscador</span>
-                           </a>
-                        ) : (
-                           <a
-                              href="#"
-                              className="block border-b-4 border-transparent p-4"
-                              style={{ marginTop: '5px' }}
-                           >
-                              <svg
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 fill="none"
-                                 viewBox="0 0 24 24"
-                                 strokeWidth="1.5"
-                                 stroke="currentColor"
-                                 className="w-6 h-6 hover:text-blue-600"
-                                 onClick={() => props.setState(!props.state)}
-                              >
-                                 <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                                 />
-                              </svg>
-
-                              <span className="sr-only">Buscador</span>
-                           </a>
-                        )}
+                           <span className="sr-only">Search</span>
+                        </a>
                      </span>
                   </div>
                </div>
