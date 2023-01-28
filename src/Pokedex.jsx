@@ -10,11 +10,12 @@ const urlApi = 'https://pokeapi.co/api/v2/pokemon?limit=20';
 
 function Pokedex() {
    const [pokemons, setPokemons] = useState([]);
-   const [nextPage, setNextPage] = useState([]);
+   const [nextPage, setNextPage] = useState();
    const [query, setQuery] = useState('');
    const [searchInput, setSearchInput] = useState(false);
    const [alert, setAlert] = useState(false);
    const [favouriteButton, setFavouriteButton] = useState(false);
+   const [favourite, setFavourite] = useState([]);
 
    // fetch data from PokeApi
    useEffect(() => {
@@ -52,6 +53,13 @@ function Pokedex() {
          });
       });
    };
+
+   // check favourites
+   useEffect(() => {
+      favourite.length >= 1
+         ? console.log('hay fav')
+         : console.log('no hay fav');
+   }, [favouriteButton]);
 
    return (
       <div className="App">
@@ -128,6 +136,8 @@ function Pokedex() {
                            stats={pokemon.stats}
                            types={pokemon.types}
                            id={pokemon.id}
+                           favouriteState={favourite}
+                           favouriteSetState={setFavourite}
                         />
                      ))}
                </div>

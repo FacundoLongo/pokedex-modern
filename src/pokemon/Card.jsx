@@ -3,17 +3,15 @@ import Type from './Type';
 import { useState } from 'react';
 
 export default function Card(props) {
-   const [favourite, setFavourite] = useState([]);
-
    const handleFavourite = (id) => {
-      if (favourite.includes(id)) {
-         const aux = favourite.splice(id);
-         setFavourite(aux);
+      if (props.favouriteState.includes(id)) {
+         const aux = [...props.favouriteState];
+         var i = aux.indexOf(id);
+         aux.splice(i, 1);
+         props.favouriteSetState(aux);
       } else {
-         setFavourite([...favourite, id]);
+         props.favouriteSetState([...props.favouriteState, id]);
       }
-
-      console.log(favourite);
    };
 
    return (
@@ -26,14 +24,16 @@ export default function Card(props) {
             className="c-card block bg-white shadow-lg hover:shadow-xl rounded-lg overflow-hidden"
          >
             <div className="relative pb-48 overflow-hidden">
-               {favourite.includes(props.id) ? (
+               {props.favouriteState.includes(props.id) ? (
                   <button
                      className="absolute right-5 top-5 z-10 rounded-full bg-white p-2.5 text-black-400 transition hover:text-red-800"
                      onClick={() => handleFavourite(props.id)}
+                     key={Math.random()}
                   >
                      <span className="sr-only">Favourite</span>
 
                      <svg
+                        key={Math.random()}
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -52,6 +52,7 @@ export default function Card(props) {
                   <button
                      className="absolute right-5 top-5 z-10 rounded-full bg-white p-2.5 text-gray-900 transition hover:text-red-800"
                      onClick={() => handleFavourite(props.id)}
+                     key={Math.random()}
                   >
                      <span className="sr-only">Favourite</span>
 
@@ -81,10 +82,7 @@ export default function Card(props) {
 
             <div className="p-4" key={Math.random()}>
                {props.types.map((item, index) => (
-                  <Type
-                     nameType={item.type.name}
-                     key={index + '-' + Math.random()}
-                  />
+                  <Type nameType={item.type.name} key={Math.random()} />
                ))}
 
                <h2 className="mt-5 mb-2  font-bold text-2xl ">
