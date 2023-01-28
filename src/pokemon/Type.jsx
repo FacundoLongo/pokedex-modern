@@ -77,7 +77,7 @@ export default function Type(props) {
    }
 
    return (
-      <span className={classBasic + color} key={Math.random()}>
+      <span className={classBasic + color} key={props.id}>
          {props.nameType}
       </span>
    );

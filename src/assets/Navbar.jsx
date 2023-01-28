@@ -18,7 +18,7 @@ export default function NavBar(props) {
       >
          <div className="mx-auto flex h-16 max-w-screen-2xl items-center justify-between sm:px-6 lg:px-8 ">
             <div className="flex items-center">
-               <a href="#" className="flex">
+               <a href="/" className="flex">
                   <h2 className="px-4 font-bold text-xl">{props.name}</h2>
                </a>
             </div>
@@ -54,7 +54,7 @@ export default function NavBar(props) {
                      </span>
 
                      <span>
-                        <a
+                        <div
                            href="#"
                            className="block border-b-4 border-transparent p-4"
                            style={{ marginTop: '5px' }}
@@ -78,7 +78,7 @@ export default function NavBar(props) {
                            </svg>
 
                            <span className="sr-only">Search</span>
-                        </a>
+                        </div>
                      </span>
                   </div>
                </div>

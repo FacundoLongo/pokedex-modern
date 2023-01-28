@@ -6,23 +6,28 @@ import NavBar from './assets/Navbar';
 
 import { Alert } from 'flowbite-react';
 
-const urlApi = 'https://pokeapi.co/api/v2/pokemon?limit=20';
+const urlApi = 'https://pokeapi.co/api/v2/pokemon?limit=40';
 
 function Pokedex() {
    const [pokemons, setPokemons] = useState([]);
    const [nextPage, setNextPage] = useState();
    const [query, setQuery] = useState('');
    const [searchInput, setSearchInput] = useState(false);
-   const [alert, setAlert] = useState(false);
+   const [alertSuccess, setAlertSuccess] = useState(false);
+   const [alertFail, setAlertFail] = useState(false);
    const [favouriteButton, setFavouriteButton] = useState(false);
    const [favourite, setFavourite] = useState([]);
 
    // fetch data from PokeApi
    useEffect(() => {
       axios.get(urlApi).then((response) => {
+         // set next page
          setNextPage(response.data.next);
 
+         // set basic data
          let pokemonsData = response.data.results;
+
+         // save in promise the url of the each pokemon
          let pokemonsPromise = pokemonsData.map((pokemonData) =>
             axios.get(pokemonData.url)
          );
@@ -56,10 +61,12 @@ function Pokedex() {
 
    // check favourites
    useEffect(() => {
-      favourite.length >= 1
-         ? console.log('hay fav')
-         : console.log('no hay fav');
-   }, [favouriteButton]);
+      if (favourite.length < 1 && favouriteButton == true) {
+         setAlertFail(true);
+      } else {
+         setAlertFail(false);
+      }
+   }, [favouriteButton, favourite]);
 
    return (
       <div className="App">
@@ -73,44 +80,62 @@ function Pokedex() {
             />
 
             <div className="container mx-auto">
-               <br />
-               {alert === true ? (
-                  <Alert
-                     color="success"
-                     onDismiss={function onDismiss() {
-                        setAlert(false);
-                     }}
-                  >
-                     <span>
-                        <span className="font-medium">
-                           {' '}
-                           All pokemons has been loaded !!!
+               <div className="max-sm:px-5">
+                  <br />
+                  {alertSuccess === true ? (
+                     <Alert
+                        color="success"
+                        onDismiss={function onDismiss() {
+                           setAlert(false);
+                        }}
+                     >
+                        <span>
+                           <span className="font-medium">
+                              {' '}
+                              All pokemons has been loaded !!!
+                           </span>
                         </span>
-                     </span>
-                  </Alert>
-               ) : (
-                  ''
-               )}
+                     </Alert>
+                  ) : (
+                     ''
+                  )}
 
-               {searchInput !== false ? (
-                  <div>
-                     <div className="flex justify-center">
-                        <div className="mb-3 xl:w-96">
-                           <input
-                              type="search"
-                              className=" form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
-                              placeholder={query === '' ? 'Search...' : query}
-                              value={query === '' ? '' : query}
-                              onChange={(event) => setQuery(event.target.value)}
-                           />
+                  {alertFail === true ? (
+                     <Alert color="failure">
+                        <span>
+                           <span className="font-medium">
+                              Pokemons has not been found in favourites...{' '}
+                           </span>
+                        </span>
+                     </Alert>
+                  ) : (
+                     ''
+                  )}
+
+                  {searchInput !== false ? (
+                     <div>
+                        <div className="flex justify-center">
+                           <div className="mb-3 xl:w-96">
+                              <input
+                                 type="search"
+                                 className=" form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
+                                 placeholder={
+                                    query === '' ? 'Search...' : query
+                                 }
+                                 value={query === '' ? '' : query}
+                                 onChange={(event) =>
+                                    setQuery(event.target.value)
+                                 }
+                              />
+                           </div>
                         </div>
                      </div>
-                  </div>
-               ) : (
-                  ''
-               )}
+                  ) : (
+                     ''
+                  )}
 
-               <br />
+                  <br />
+               </div>
 
                <div className="flex flex-wrap -mx-3 ">
                   {pokemons
@@ -122,6 +147,13 @@ function Pokedex() {
                               .toLowerCase()
                               .includes(query.toLowerCase())
                         ) {
+                           return pokemon;
+                        }
+                     })
+                     .filter((pokemon) => {
+                        if (favouriteButton !== true) {
+                           return pokemon;
+                        } else if (favourite.includes(pokemon.id)) {
                            return pokemon;
                         }
                      })
@@ -146,10 +178,10 @@ function Pokedex() {
                      onClick={handleButton}
                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded max-sm:mx-5"
                   >
-                     Load more!
+                     Load more pokemons!
                   </button>
                ) : (
-                  'Not more pokemons'
+                  setAlertSuccess(true)
                )}
                <br />
                <br />
