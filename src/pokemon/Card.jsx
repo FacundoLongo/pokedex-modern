@@ -1,8 +1,8 @@
-import Progress from './Progress';
-import Type from './Type';
-import { useState } from 'react';
+import { Progress } from './Progress.jsx';
+import { Type } from './Type';
+import { saveToStorage } from '../storage/index.js';
 
-export default function Card(props) {
+export const Card = (props) => {
    const handleFavourite = (id) => {
       if (props.favouriteState.includes(id)) {
          // delete from state
@@ -10,8 +10,10 @@ export default function Card(props) {
          var i = aux.indexOf(id);
          aux.splice(i, 1);
          props.favouriteSetState(aux);
+         saveToStorage(aux);
       } else {
          props.favouriteSetState([...props.favouriteState, id]);
+         saveToStorage([...props.favouriteState, id]);
       }
    };
 
@@ -109,4 +111,4 @@ export default function Card(props) {
          </div>
       </div>
    );
-}
+};

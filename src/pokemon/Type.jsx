@@ -1,4 +1,4 @@
-export default function Type(props) {
+export const Type = (props) => {
    const classBasic =
       'inline-block mx-1 px-2 py-1 leading-none rounded-full font-semibold uppercase tracking-wide text-xs ';
 
@@ -81,4 +81,4 @@ export default function Type(props) {
          {props.nameType}
       </span>
    );
-}
+};

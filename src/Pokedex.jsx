@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './index.css';
-import Card from './pokemon/Card.jsx';
-import NavBar from './assets/Navbar';
-
+import { Card } from './pokemon/Card.jsx';
+import { NavBar } from './assets/Navbar';
 import { Alert } from 'flowbite-react';
 
 const urlApi = 'https://pokeapi.co/api/v2/pokemon?limit=40';
@@ -16,7 +15,11 @@ function Pokedex() {
    const [alertSuccess, setAlertSuccess] = useState(false);
    const [alertFail, setAlertFail] = useState(false);
    const [favouriteButton, setFavouriteButton] = useState(false);
-   const [favourite, setFavourite] = useState([]);
+
+   const [favourite, setFavourite] = useState(() => {
+      const favouriteFromStorage = window.localStorage.getItem('favourite');
+      return favouriteFromStorage ? JSON.parse(favouriteFromStorage) : [];
+   });
 
    // fetch data from PokeApi
    useEffect(() => {

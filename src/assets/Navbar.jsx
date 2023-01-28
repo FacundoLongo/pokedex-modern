@@ -1,4 +1,4 @@
-export default function NavBar(props) {
+export const NavBar = (props) => {
    if (props.favButton) {
       var classFav = 'hover:text-red-800 fill-red-500';
    } else {
@@ -86,4 +86,4 @@ export default function NavBar(props) {
          </div>
       </header>
    );
-}
+};

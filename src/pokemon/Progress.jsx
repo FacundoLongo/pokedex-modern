@@ -1,4 +1,4 @@
-export default function Progress(props) {
+export const Progress = (props) => {
    switch (props.name) {
       case 'hp':
          var classDiv =
@@ -94,4 +94,4 @@ export default function Progress(props) {
          </div>
       </div>
    );
-}
+};
