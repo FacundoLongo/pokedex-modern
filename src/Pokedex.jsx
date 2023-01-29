@@ -4,6 +4,7 @@ import './index.css';
 import { Card } from './pokemon/Card.jsx';
 import { NavBar } from './assets/Navbar';
 import { Alert } from 'flowbite-react';
+import { Footer } from './assets/Footer.jsx';
 
 const urlApi = 'https://pokeapi.co/api/v2/pokemon?limit=40';
 
@@ -139,7 +140,6 @@ function Pokedex() {
 
                   <br />
                </div>
-
                <div className="flex flex-wrap -mx-3 ">
                   {pokemons
                      .filter((pokemon) => {
@@ -186,6 +186,9 @@ function Pokedex() {
                ) : (
                   setAlertSuccess(true)
                )}
+               <br />
+               <Footer />
+               <br />
                <br />
                <br />
                <br />
