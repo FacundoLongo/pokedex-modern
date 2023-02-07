@@ -39,11 +39,11 @@ cd pokedex-modern
 ```
 - Install all dependencies
 ```
-npm install or yarn install
+npm install
 ```
 - Run the app
 ```
-npm start or yarn start
+npm run dev
 ```
 
 ## 📃 To-do
