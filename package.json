@@ -1,8 +1,9 @@
 {
    "name": "pokedex-modern",
-   "private": true,
-   "version": "0.0.0",
+   "private": false,
+   "version": "1.0.0",
    "type": "module",
+   "homepage": "https://facundolongo.github.io/pokedex-modern/",
    "scripts": {
       "dev": "vite",
       "build": "vite build",
