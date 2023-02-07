@@ -5,7 +5,7 @@ I wanted make a project with React, so I coded a <i>"Pokedex"</i> from the anime
 
 
 ## 🔗 Demo
-Link to go to the <a href="[#](https://facundolongo.github.io/pokedex-modern/)">demo</a>
+Link to go to the <a href="https://facundolongo.github.io/pokedex-modern/">demo</a>
 
 
 ## 📷 Preview
